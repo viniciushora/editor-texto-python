@@ -1,21 +1,16 @@
 class TabelaHash:
     def __init__(self):
-        self.tabela = []
-        self.tamanho = 1e9 + 9
-
-    def iniciar():
-        for i in range(self.tamanho):
-            self.tabela.append(None)
+        self.tamanho = 10000009
+        self.tabela = [None] * self.tamanho
 
     def hash(self,s):
         p = 31
-        m = 1e9 + 9
         valor = 0
         p_pow = 1
         for c in s:
-            valor = (valor + (c - 'a' + 1) * p_pow) % m
-            p_pow = (p_pow * p) % m
-        return valor
+            valor = (valor + (ord(c) - ord('a') + 1) * p_pow) % self.tamanho
+            p_pow = (p_pow * p) % self.tamanho
+        return int(valor)
 
     def armazenar(self,s):
         chave = self.hash(s)
